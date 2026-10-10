@@ -1,0 +1,20 @@
+.loading{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 0%;
+  background-color: red;
+  z-index: 10000;
+  border-radius: 10px;
+  animation-name: Loading;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes Loading {
+  100%{
+    width: 100%;
+  }
+}

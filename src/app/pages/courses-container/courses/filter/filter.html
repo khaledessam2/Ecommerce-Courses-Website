@@ -1,0 +1,19 @@
+<div class="p-3 mb-4 overflow-hidden">
+  <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-filter text-danger"></i>
+      <h6 class="mb-0 fw-semibold">Filter Courses</h6>
+    </div>
+
+    <div class="btn-group" role="group">
+      <input type="radio" class="btn-check" value="all" name="Filter" id="all" [checked]="Selected === 'all'" (change)="ChangeSelectedRadioButton($event)" />
+      <label class="btn btn-outline-danger" for="all"> All Courses ({{All}}) </label>
+
+      <input type="radio" class="btn-check" value="free" name="Filter" id="free" [checked]="Selected === 'free'" (change)="ChangeSelectedRadioButton($event)" />
+      <label class="btn btn-outline-danger" for="free"> Free Courses ({{Free}}) </label>
+
+      <input type="radio" class="btn-check" value="premium" name="Filter" id="premium" [checked]="Selected === 'premium'" (change)="ChangeSelectedRadioButton($event)"  />
+      <label class="btn btn-outline-danger" for="premium"> Premium Courses ({{premium}}) </label>
+    </div>
+  </div>
+</div>

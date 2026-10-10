@@ -1,0 +1,6 @@
+<div class="app-toaster">
+  <div *ngFor="let toast of toastService.toasts" [class]="'app-toast ' + toast.type" role="alert">
+    <span class="app-toast-message">{{ toast.message }}</span>
+    <button type="button" class="app-toast-close" aria-label="Close" (click)="toastService.dismiss(toast)">&times;</button>
+  </div>
+</div>

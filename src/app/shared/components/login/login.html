@@ -1,0 +1,46 @@
+<div class="login-wrapper">
+  <form [formGroup]="loginForm" (ngSubmit)="SubmitLogin()" class="login">
+    <div class="login-icon">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <h1>{{mode === 'Login' ? "Welcome Back" : "Create Account"}}</h1>
+    <p class="subtitle">{{mode === 'Login' ? "Login to continue to your account" : "Sign up to get started"}}</p>
+
+    <div class="input-container">
+      <label for="Email">Email</label>
+      <div class="input-field">
+        <i class="fa-solid fa-user"></i>
+        <input type="email" id="Email" formControlName="Email" placeholder="Enter Email">
+      </div>
+      @if (loginForm.controls['Email'].touched && loginForm.controls['Email'].invalid) {
+        @if (loginForm.controls['Email'].errors?.['required']) {
+          <small>Email is Required</small>
+        }
+        @if (loginForm.controls['Email'].errors?.['email']) {
+          <small>Please Use Email Format</small>
+        }
+      }
+    </div>
+    <div class="input-container">
+      <label for="password">Password</label>
+      <div class="input-field">
+        <i
+          class="fa-solid"
+          [ngClass]="passwordInput && passwordInput.type === 'password' ? 'fa-lock' : 'fa-eye'"
+          (click)="passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password'"
+        ></i>
+        <input #passwordInput type="password" id="password" formControlName="password" placeholder="Enter your Password">
+      </div>
+      @if (loginForm.controls['password'].invalid && loginForm.controls['password'].touched) {
+        <small>Password is Required</small>
+      }
+    </div>
+
+    <button type="submit">{{mode === 'Login' ? "Login" : "Sign Up"}}</button>
+
+    <p class="switch-mode">
+      {{mode === 'Login' ? "Don't have an account?" : "Already have an account?"}}
+      <a (click)="switchMode()">{{mode === 'Login' ? "Sign Up" : "Login"}}</a>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,105 @@
+<div class="container py-5 my-4">
+  <div class="row g-4 px-2">
+    <!-- Payment Information -->
+    <div class="col-lg-7">
+      <div class="checkout-panel h-100">
+        <h4 class="fw-bold mb-4">Payment Information</h4>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Full Name</label>
+          <input type="text" class="form-control checkout-input" placeholder="Satoshi Nakamoto" />
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold d-flex align-items-center gap-2">
+            Card Number
+            <span class="card-icons">
+              <i class="fa-brands fa-cc-visa"></i>
+              <i class="fa-brands fa-cc-mastercard"></i>
+              <i class="fa-brands fa-cc-discover"></i>
+              <i class="fa-brands fa-cc-amex"></i>
+            </span>
+          </label>
+          <input type="text" class="form-control checkout-input" placeholder="1111-2222-3333-4444" />
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold d-block">Expires on:</label>
+          <div class="d-flex align-items-center gap-3">
+            <label class="fw-semibold mb-0">Month</label>
+            <select class="form-select checkout-input checkout-select">
+              <option>Month</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+            <label class="fw-semibold mb-0">Year</label>
+            <select class="form-select checkout-input checkout-select">
+              <option>Year</option>
+              <option>2026</option>
+              <option>2027</option>
+              <option>2028</option>
+              <option>2029</option>
+              <option>2030</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold">CVV</label>
+          <div class="d-flex align-items-center gap-3">
+            <input type="text" class="form-control checkout-input cvv-input" placeholder="415" />
+            <a href="javascript:void(0)" class="cvv-link">What is CVV?</a>
+          </div>
+        </div>
+
+        <button class="btn btn-buy-now w-100">
+          <i class="fa-solid fa-lock me-2"></i>Buy Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="col-lg-5">
+      <div class="checkout-panel h-100">
+        <h4 class="fw-bold mb-4">{{course?.name}}</h4>
+
+        <div class="d-flex justify-content-between summary-row">
+          <span class="text-muted">Price</span>
+          <span>{{course?.price}} {{course?.price === 'Free' ? '' : '$'}}</span>
+        </div>
+
+        <div class="d-flex justify-content-between summary-row">
+          <span class="text-muted">Discount</span>
+          <span>0.00$</span>
+        </div>
+
+        <div class="d-flex justify-content-between summary-row">
+          <span class="text-muted">Subtotal</span>
+          <span>{{`${course?.price}` }}  {{course?.price === 'Free' ? '' : '$'}}</span>
+        </div>
+
+        <div class="d-flex justify-content-between summary-row">
+          <span class="text-muted">Tax</span>
+          <span>47.41$</span>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-between total-row">
+          <span class="fw-bold">Total</span>
+          <span class="fw-bold">{{ course?.price === 'Free' ? 47.41 : ((+ (course?.price ?? 0)) + 47.41) }}$</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

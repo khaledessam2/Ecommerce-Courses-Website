@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark app-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>My Store</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1 text-center">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'Home'" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'About'" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'Contact'" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'Courses'" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Courses</a>
+        </li>
+      </ul>
+
+      <div class="d-flex flex-column flex-lg-row gap-lg-3 gap-1 section-links text-center mb-2 mb-lg-0 me-lg-4">
+        <a routerLink="Home" fragment="banner" class="text-decoration-none">Banner</a>
+        <a routerLink="Home" fragment="featuredCourses" class="text-decoration-none">Featured Courses</a>
+        <a routerLink="Home" fragment="chooseUs" class="text-decoration-none">Why Choose Us</a>
+        <a routerLink="Home" fragment="faq" class="text-decoration-none">FAQ</a>
+      </div>
+
+      <div class="d-flex gap-2 auth-buttons justify-content-center">
+      @if(iSLogin){
+        <button class="btn btn-danger btn-sm px-3 rounded-pill" (click)="LogOut()">
+          <i class="fa-solid fa-right-from-bracket me-1"></i>
+          Logout
+        </button>
+      }@else {
+        <button class="btn btn-outline-light btn-sm px-3 rounded-pill" routerLink="login">
+          <i class="fa-solid fa-right-to-bracket me-1"></i>
+          Login
+        </button>
+      }
+      </div>
+    </div>
+  </div>
+</nav>

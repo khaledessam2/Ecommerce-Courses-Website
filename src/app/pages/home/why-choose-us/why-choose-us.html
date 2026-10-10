@@ -1,0 +1,16 @@
+<div class="why-choose-us">
+  <div class="section-header">
+    <h1>Why Choose Us</h1>
+    <p>Everything you need to go from beginner to job-ready developer.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card" *ngFor="let feature of features">
+      <div class="feature-icon">
+        <i [class]="feature.icon"></i>
+      </div>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
+    </div>
+  </div>
+</div>

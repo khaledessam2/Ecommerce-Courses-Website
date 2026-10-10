@@ -1,0 +1,49 @@
+<div class="featured-courses">
+  <div class="section-header">
+    <h1>Featured Courses</h1>
+    <p>Handpicked courses to help you start your learning journey.</p>
+  </div>
+
+@if (LoaderService.isLoading$ | async) {
+  <div class="courses-grid">
+    <div class="course-card" *ngFor="let item of [1, 2, 3, 4]">
+      <div class="course-img-wrap">
+        <app-skelton  width="100%" height="200px" class="course-img"></app-skelton>
+      </div>
+      <div class="course-body">
+        <app-skelton width="40%" height="10px"></app-skelton>
+        <app-skelton width="40%" height="10px"></app-skelton>
+        <app-skelton width="100%" height="10px"></app-skelton>
+        <app-skelton width="100%" height="10px"></app-skelton>
+        <app-skelton width="100%" height="10px"></app-skelton>
+      </div>
+    </div>
+  </div>
+}@else {
+  <div class="courses-grid">
+    <div class="course-card" *ngFor="let course of courses" (click)="GoToDetails(course.id)">
+      <div class="course-img-wrap">
+        <img [src]="course.image" [alt]="course.name" class="course-img" />
+        <span class="price-badge" [ngStyle]="{ background: course.price === 'Free' ? 'var(--color-primary)' : 'var(--color-dark)' }">
+          {{ course.price === 'Free' ? 'Free' : '$' + course.price }}
+        </span>
+      </div>
+      <div class="course-body">
+        <span class="category">{{ course.category }}</span>
+        <h3>{{ course.name }}</h3>
+        <p class="desc">{{ course.description }}</p>
+        <div class="rating">
+          <i class="fa-solid fa-star" *ngFor="let star of stars(course.rating)"></i>
+          <span class="rating-value">{{ course.rating }}</span>
+          <span class="reviews">({{ course.reviews }} reviews)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+
+  <div class="view-all-wrap">
+    <button class="view-all-btn" (click)="GoToAllCourses()">View All Courses</button>
+  </div>
+</div>

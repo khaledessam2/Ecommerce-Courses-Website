@@ -1,0 +1,128 @@
+@let course = SelectedCourse;
+@if (LoaderService.isLoading$ | async) {
+<div class="container py-5 details-panel my-5">
+  <div class="row g-5 px-4">
+    <div class="col-lg-6">
+      <app-skelton width="100%" height="360px"></app-skelton>
+    </div>
+    <div class="col-lg-6">
+      <app-skelton width="25%" height="10px"></app-skelton>
+      <app-skelton width="60%" height="28px"></app-skelton>
+      <app-skelton width="40%" height="10px"></app-skelton>
+      <app-skelton width="30%" height="28px"></app-skelton>
+      <app-skelton width="100%" height="10px"></app-skelton>
+      <app-skelton width="100%" height="10px"></app-skelton>
+      <app-skelton width="70%" height="10px"></app-skelton>
+      <app-skelton width="45%" height="44px"></app-skelton>
+    </div>
+  </div>
+  <div class="mt-4 px-4">
+    <app-skelton width="30%" height="20px"></app-skelton>
+    <app-skelton width="100%" height="10px"></app-skelton>
+    <app-skelton width="100%" height="10px"></app-skelton>
+    <app-skelton width="60%" height="10px"></app-skelton>
+  </div>
+  <hr>
+  <div class="row g-3">
+    @for (i of [1, 2, 3]; track i) {
+    <div class="col-sm-6 col-md-4 col-lg-4 d-flex">
+      <div class="card course-card">
+        <div class="course-img-wrap">
+          <app-skelton width="100%" height="200px"></app-skelton>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <app-skelton width="60%" height="10px"></app-skelton>
+          <app-skelton width="100%" height="10px"></app-skelton>
+          <app-skelton width="100%" height="10px"></app-skelton>
+          <app-skelton width="40%" height="10px"></app-skelton>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+} @else {
+<div class="container py-5 details-panel my-5">
+  <div class="row g-5 px-4">
+    <!-- Product Image -->
+    <div class="col-lg-6">
+        <div class="details-img-wrap">
+          <img [src]="course?.image" [alt]="course?.name" class="img-fluid rounded" />
+        </div>
+    </div>
+    <!-- Product Info -->
+    <div class="col-lg-6">
+      <span class="eyebrow">{{ course?.category }}</span>
+      <h2 class="fw-bold">{{ course?.name }}</h2>
+      <div class="my-3 d-flex align-items-center">
+        <span class="rating-badge"> <i class="fa-solid fa-star"></i> {{ course?.rating }} </span>
+        <span class="text-muted ms-2"> ({{ course?.reviews }} Reviews) </span>
+      </div>
+      <h3 class="price-display">{{ course?.price === 'Free' ? 'Free' : '$' + course?.price }}</h3>
+      <p class="text-muted mt-3">
+        {{ course?.description }}
+      </p>
+      <hr />
+      <!-- Status -->
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <span class="badge ms-0" [NgClassDir]="{'bg-success' : course?.stock , 'bg-danger' : !course?.stock}">
+          {{ course?.stock ? 'In Stock' : 'Out of Stock' }}
+        </span>
+      </div>
+      <!-- Quantity -->
+      <div class="d-flex align-items-center mb-4">
+        <label class="me-3 fw-semibold">Quantity</label>
+        <input type="number" class="form-control w-25 qty-input" min="1" [(ngModel)]="quantity" />
+      </div>
+      <!-- Buttons -->
+      @if (course?.is_in_inventory) {
+        <div class="d-flex gap-3">
+          <button class="btn btn-buy btn-lg" HoverDirective ><i class="fa-solid fa-cart-shopping me-2"></i>Add to Cart</button>
+          <button class="btn btn-details btn-lg" routerLink="/Courses/checkout" >Buy Now</button>
+        </div>
+      } @else {
+        <button class="btn btn-buy btn-lg"><i class="fa-solid fa-bell me-2"></i>Notify Me</button>
+      }
+    </div>
+  </div>
+  <!-- Description -->
+  <div class="mt-4 px-4">
+    <h4>Product Description</h4>
+    <p class="text-muted">
+      {{ course?.longDescription }}
+    </p>
+  </div>
+
+  <hr>
+
+  <h1 class="fw-bold fs-3 px-3 mb-4">Suggested Courses</h1>
+
+  <!-- Suggest Courses -->
+  <div class="row g-3">
+    @for (Course of suggestCourses; track Course.id) {
+    <div appHeighlight class="col-sm-6 col-md-4 col-lg-4 cursor-pointer d-flex">
+      <div class="card course-card">
+        <div class="course-img-wrap">
+          <img [src]="Course.image" class="card-img-top product-img" [alt]="Course.name" />
+          <span class="price-badge" [ngStyle]="{ background: Course.price === 'Free' ? 'var(--color-primary)' : 'var(--color-dark)' }">
+            {{ Course.price === 'Free' ? 'Free' : '$' + Course.price }}
+          </span>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <h3 [SetBackground]="{'textColor' : 'var(--color-dark)' , 'FontWeight' : '700'}" class="fs-5 course-title">{{ Course.name }}</h3>
+          <p class="flex-grow-1 course-desc">{{ Course.description }}</p>
+          <span class="stock-badge mb-3" [ngStyleDir]="{ fontWeight: '600', color : Course.is_in_inventory ? '#1a9c53' : 'var(--color-primary)' }">
+            <i class="fa-solid" [ngClass]="Course.is_in_inventory ? 'fa-circle-check' : 'fa-circle-xmark'"></i>
+            {{ Course.is_in_inventory ? 'In Stock' : 'Out of Stock' }}
+          </span>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-buy flex-grow-1" routerLink="/Courses/checkout"><i class="fa-solid fa-cart-shopping me-1"></i>Buy</button>
+            <button class="btn btn-details flex-grow-1" [routerLink]="'/Courses/course/' + Course.id">Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}
