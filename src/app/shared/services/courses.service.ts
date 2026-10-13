@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { CoursesInterface } from "../models/Courses.interface";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../enviroment/enviroment";
+import { environment } from "../../../environments/environment";
 import { catchError, map, Observable, of } from "rxjs";
 import { ToastService } from "./toast.service";
 

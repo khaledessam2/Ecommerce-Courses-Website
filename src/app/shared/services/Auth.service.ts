@@ -5,13 +5,14 @@ import { ToastService } from "./toast.service";
 import { Router } from "@angular/router";
 import { AuthResponse } from "../models/AuthResponse";
 import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthServices {
-  private APIKEY: string = "AIzaSyAe3aMeSobBIeiflunHKJ_j8kKvOLDe8U4";
+  private APIKEY: string = environment.FireBaseApiKey;
   private LoginURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.APIKEY}`;
   private SignUpURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.APIKEY}`;
   private HTTp: HttpClient = inject(HttpClient);

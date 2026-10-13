@@ -33,7 +33,7 @@
     <div appHeighlight class="col-sm-6 col-md-4 col-lg-3 cursor-pointer d-flex" *ngFor="let Course of filterCourses; let i = index">
       <div class="card course-card h-80">
         <div class="course-img-wrap">
-          <img [src]="Course.image" class="card-img-top product-img" [alt]="Course.name" />
+          <img [src]="Course.image ? Course.image  : 'images/noimage.jpg'" class="card-img-top product-img" [alt]="Course.name" />
           <span class="price-badge" [ngStyle]="{ background: Course.price === 'Free' ? 'var(--color-primary)' : 'var(--color-dark)' }">
             {{ Course.price === 'Free' ? 'Free' : '$' + Course.price }}
           </span>
