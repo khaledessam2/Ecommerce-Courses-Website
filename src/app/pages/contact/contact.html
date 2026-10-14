@@ -44,15 +44,16 @@
           <div class="form-group">
             <label for="country">Country</label>
             <select id="country" name="country" class="contact-input-el" formControlName="country">
-              <option value="australia">Alexandria</option>
-              <option value="canada">Cairo</option>
-              <option value="usa">KSA</option>
+              <option value="" disabled>Select country</option>
+              <option value="alexandria">Alexandria</option>
+              <option value="cairo">Cairo</option>
+              <option value="ksa">KSA</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="subject">Subject</label>
-            <textarea id="subject" class="contact-input-el" placeholder="Write something.." rows="6" formArrayName="subject"></textarea>
+            <textarea id="subject" class="contact-input-el" placeholder="Write something.." rows="6" formControlName="subject"></textarea>
           </div>
 
           <input type="submit" value="Send Message" [disabled]="contactForm.invalid">

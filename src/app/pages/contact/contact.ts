@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IDeActivateComponent } from '../../shared/guards/Authquard.service';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,7 @@ import { IDeActivateComponent } from '../../shared/guards/Authquard.service';
   styleUrl: './contact.css',
 })
 export class Contact implements OnInit , IDeActivateComponent {
+  private toast : ToastService = inject(ToastService) ;
   contactForm !: FormGroup ;
   isSubmitted : boolean = false ;
 
@@ -24,9 +26,12 @@ export class Contact implements OnInit , IDeActivateComponent {
   SubmitContactForm(){
     if(this.contactForm.invalid){
       this.contactForm.markAllAsTouched() ;
-    } ;
+      return ;
+    }
+    // no backend endpoint for contact messages yet, so this only confirms to the user
     this.isSubmitted = true ;
     this.contactForm.reset() ;
+    this.toast.success("Your message has been sent. We'll get back to you shortly.") ;
   }
 
   canExit() {

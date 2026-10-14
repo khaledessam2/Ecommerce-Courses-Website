@@ -3,6 +3,7 @@ import { CoursesInterface } from '../../../shared/models/Courses.interface';
 import { CoursesService } from '../../../shared/services/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Loader } from '../../../shared/services/loading.service';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-Courses',
@@ -16,6 +17,7 @@ export class Courses implements OnInit {
   private ActivatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private cdr : ChangeDetectorRef = inject(ChangeDetectorRef) ;
   protected LoaderService : Loader = inject(Loader) ;
+  protected cartService : CartService = inject(CartService) ;
 
   private courses: CoursesInterface[] = [];
 
@@ -78,6 +80,6 @@ export class Courses implements OnInit {
   }
 
   GoToCheckout(course: CoursesInterface) {
-    this.Router.navigate(['Courses', 'checkout'], { state: { course } });
+    this.Router.navigate(['Courses', 'checkout', course.id]);
   }
 }

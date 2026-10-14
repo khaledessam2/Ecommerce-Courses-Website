@@ -77,8 +77,8 @@
       <!-- Buttons -->
       @if (course?.is_in_inventory) {
         <div class="d-flex gap-3">
-          <button class="btn btn-buy btn-lg" HoverDirective ><i class="fa-solid fa-cart-shopping me-2"></i>Add to Cart</button>
-          <button class="btn btn-details btn-lg" routerLink="/Courses/checkout" >Buy Now</button>
+          <button class="btn btn-buy btn-lg" HoverDirective (click)="cartService.add(course!, quantity)" ><i class="fa-solid fa-cart-shopping me-2"></i>Add to Cart</button>
+          <button class="btn btn-details btn-lg" [routerLink]="['/Courses/checkout', course?.id]" >Buy Now</button>
         </div>
       } @else {
         <button class="btn btn-buy btn-lg"><i class="fa-solid fa-bell me-2"></i>Notify Me</button>
@@ -116,7 +116,7 @@
             {{ Course.is_in_inventory ? 'In Stock' : 'Out of Stock' }}
           </span>
           <div class="d-flex align-items-center gap-2">
-            <button class="btn btn-buy flex-grow-1" routerLink="/Courses/checkout"><i class="fa-solid fa-cart-shopping me-1"></i>Buy</button>
+            <button class="btn btn-buy flex-grow-1" [routerLink]="['/Courses/checkout', Course.id]"><i class="fa-solid fa-cart-shopping me-1"></i>Buy</button>
             <button class="btn btn-details flex-grow-1" [routerLink]="'/Courses/course/' + Course.id">Details</button>
           </div>
         </div>

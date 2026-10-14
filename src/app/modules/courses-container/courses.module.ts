@@ -6,8 +6,9 @@ import { Filter } from "./courses/filter/filter";
 import { SharedModule } from "../../shared/shared.module";
 import { CoursesRoutingModule } from "./courses-routing.module";
 import { Checkout } from "../../pages/checkout/checkout";
+import { Cart } from "../../pages/cart/cart";
 
-const COMPONENT = [CoursesContainer , Courses , CourseDetails , Filter , Checkout]
+const COMPONENT = [CoursesContainer , Courses , CourseDetails , Filter , Checkout , Cart]
 
 @NgModule({
   declarations : [...COMPONENT] ,

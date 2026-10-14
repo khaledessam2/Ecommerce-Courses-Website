@@ -3,6 +3,7 @@ import { CoursesInterface } from '../../../shared/models/Courses.interface';
 import { CoursesService } from '../../../shared/services/courses.service';
 import { ActivatedRoute } from '@angular/router';
 import { Loader } from '../../../shared/services/loading.service';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-course-details',
@@ -15,6 +16,7 @@ export class CourseDetails implements OnInit {
   private ActivatedRoute : ActivatedRoute = inject(ActivatedRoute) ;
   private cdr : ChangeDetectorRef = inject(ChangeDetectorRef)
   protected LoaderService : Loader = inject(Loader) ;
+  protected cartService : CartService = inject(CartService) ;
 
   private courses : CoursesInterface[] = [] ;
 

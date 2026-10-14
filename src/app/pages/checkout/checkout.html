@@ -2,12 +2,15 @@
   <div class="row g-4 px-2">
     <!-- Payment Information -->
     <div class="col-lg-7">
-      <div class="checkout-panel h-100">
+      <form class="checkout-panel h-100" [formGroup]="checkoutForm" (ngSubmit)="BuyNow()">
         <h4 class="fw-bold mb-4">Payment Information</h4>
 
         <div class="mb-4">
           <label class="form-label fw-semibold">Full Name</label>
-          <input type="text" class="form-control checkout-input" placeholder="Satoshi Nakamoto" />
+          <input type="text" class="form-control checkout-input" placeholder="Satoshi Nakamoto" formControlName="fullName" />
+          @if (checkoutForm.controls['fullName'].touched && checkoutForm.controls['fullName'].invalid) {
+            <small class="text-danger">Full name is required</small>
+          }
         </div>
 
         <div class="mb-4">
@@ -20,15 +23,18 @@
               <i class="fa-brands fa-cc-amex"></i>
             </span>
           </label>
-          <input type="text" class="form-control checkout-input" placeholder="1111-2222-3333-4444" />
+          <input type="text" class="form-control checkout-input" placeholder="1111-2222-3333-4444" formControlName="cardNumber" />
+          @if (checkoutForm.controls['cardNumber'].touched && checkoutForm.controls['cardNumber'].invalid) {
+            <small class="text-danger">Enter a valid 16-digit card number</small>
+          }
         </div>
 
         <div class="mb-4">
           <label class="form-label fw-semibold d-block">Expires on:</label>
           <div class="d-flex align-items-center gap-3">
             <label class="fw-semibold mb-0">Month</label>
-            <select class="form-select checkout-input checkout-select">
-              <option>Month</option>
+            <select class="form-select checkout-input checkout-select" formControlName="month">
+              <option value="" disabled>Month</option>
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -43,8 +49,8 @@
               <option>12</option>
             </select>
             <label class="fw-semibold mb-0">Year</label>
-            <select class="form-select checkout-input checkout-select">
-              <option>Year</option>
+            <select class="form-select checkout-input checkout-select" formControlName="year">
+              <option value="" disabled>Year</option>
               <option>2026</option>
               <option>2027</option>
               <option>2028</option>
@@ -52,20 +58,26 @@
               <option>2030</option>
             </select>
           </div>
+          @if ((checkoutForm.controls['month'].touched && checkoutForm.controls['month'].invalid) || (checkoutForm.controls['year'].touched && checkoutForm.controls['year'].invalid)) {
+            <small class="text-danger">Select the card expiry date</small>
+          }
         </div>
 
         <div class="mb-4">
           <label class="form-label fw-semibold">CVV</label>
           <div class="d-flex align-items-center gap-3">
-            <input type="text" class="form-control checkout-input cvv-input" placeholder="415" />
+            <input type="text" class="form-control checkout-input cvv-input" placeholder="415" formControlName="cvv" />
             <a href="javascript:void(0)" class="cvv-link">What is CVV?</a>
           </div>
+        @if (checkoutForm.controls['cvv'].touched && checkoutForm.controls['cvv'].invalid) {
+          <small class="text-danger">CVV must be 3 or 4 digits</small>
+        }
         </div>
 
-        <button class="btn btn-buy-now w-100">
+        <button type="submit" class="btn btn-buy-now w-100" [disabled]="!course">
           <i class="fa-solid fa-lock me-2"></i>Buy Now
         </button>
-      </div>
+      </form>
     </div>
 
     <!-- Order Summary -->
@@ -75,7 +87,7 @@
 
         <div class="d-flex justify-content-between summary-row">
           <span class="text-muted">Price</span>
-          <span>{{course?.price}} {{course?.price === 'Free' ? '' : '$'}}</span>
+          <span>{{ price | number:'1.2-2' }}$</span>
         </div>
 
         <div class="d-flex justify-content-between summary-row">
@@ -85,19 +97,19 @@
 
         <div class="d-flex justify-content-between summary-row">
           <span class="text-muted">Subtotal</span>
-          <span>{{`${course?.price}` }}  {{course?.price === 'Free' ? '' : '$'}}</span>
+          <span>{{ price | number:'1.2-2' }}$</span>
         </div>
 
         <div class="d-flex justify-content-between summary-row">
           <span class="text-muted">Tax</span>
-          <span>47.41$</span>
+          <span>{{ tax | number:'1.2-2' }}$</span>
         </div>
 
         <hr />
 
         <div class="d-flex justify-content-between total-row">
           <span class="fw-bold">Total</span>
-          <span class="fw-bold">{{ course?.price === 'Free' ? 47.41 : ((+ (course?.price ?? 0)) + 47.41) }}$</span>
+          <span class="fw-bold">{{ total | number:'1.2-2' }}$</span>
         </div>
       </div>
     </div>

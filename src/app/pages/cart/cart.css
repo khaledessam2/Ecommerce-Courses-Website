@@ -1,0 +1,10 @@
+.cart-img {
+  width: 90px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.cart-qty {
+  width: 80px;
+}

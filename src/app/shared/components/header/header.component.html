@@ -33,7 +33,13 @@
         <a routerLink="Home" fragment="faq" class="text-decoration-none">FAQ</a>
       </div>
 
-      <div class="d-flex gap-2 auth-buttons justify-content-center">
+      <div class="d-flex gap-2 auth-buttons justify-content-center align-items-center">
+      <a routerLink="/Courses/cart" class="btn btn-outline-light btn-sm px-3 rounded-pill position-relative" aria-label="Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        @if ((cartService.count$ | async); as count) {
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ count }}</span>
+        }
+      </a>
       @if(iSLogin){
         <button class="btn btn-danger btn-sm px-3 rounded-pill" (click)="LogOut()">
           <i class="fa-solid fa-right-from-bracket me-1"></i>

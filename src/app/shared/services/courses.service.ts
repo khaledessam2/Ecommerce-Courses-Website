@@ -16,10 +16,10 @@ export class CoursesService{
     GetCoureses(): Observable<CoursesInterface[]> {
       return this.http.get<Record<string, CoursesInterface>>(`${environment.firebaseUrl}courses.json`).pipe(
         map((value) => {
-          return Object.keys(value).map((key) => value[key]);
+          return Object.values(value ?? {});
         }),
         catchError((error) => {
-          this.toast.error(`Failed : ${error.error.error}`);
+          this.toast.error(`Failed : ${error?.error?.error ?? error?.message ?? "Unknown error"}`);
           return of([]);
         })
       );

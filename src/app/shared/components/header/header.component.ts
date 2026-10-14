@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthServices } from "../../services/Auth.service";
 import { Subscription } from "rxjs";
+import { CartService } from "../../services/cart.service";
 
 @Component({
   selector : "app-header" ,
@@ -13,6 +14,7 @@ import { Subscription } from "rxjs";
 export class HeaderComponent implements OnInit , OnDestroy{
   private router : Router = inject(Router) ;
   private AuthServices : AuthServices = inject(AuthServices) ;
+  protected cartService : CartService = inject(CartService) ;
   private UserSubject !: Subscription ;
   iSLogin : boolean = false ;
   ngOnInit(): void {
